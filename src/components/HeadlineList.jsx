@@ -41,14 +41,32 @@ export default function HeadlineList({ headlines }) {
             className={`
               border rounded-xl p-4
               ${bgMap[h.label]}
+              transition-all
+              hover:scale-[1.01]
             `}
           >
 
-            <p className="text-sm text-zinc-200 mb-3 leading-relaxed cursor-pointer">
-              {h.headline}
-            </p>
-
-            <div className="flex flex-wrap gap-2 items-center cursor-pointer">
+            {/* Clickable Headline */}
+            <a
+              href={h.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="
+                text-sm 
+                text-zinc-200 
+                mb-3 
+                leading-relaxed 
+                block 
+                hover:text-purple-300 
+                transition
+                cursor-pointer
+                hover:underline
+                decoration-purple-500/50
+              "
+            >
+              {h.title || h.headline}
+            </a>
+            <div className="flex flex-wrap gap-2 items-center">
 
               <span className={`text-xs font-semibold uppercase tracking-wide ${labelColor[h.label]}`}>
                 {h.label}
@@ -58,7 +76,7 @@ export default function HeadlineList({ headlines }) {
                 {(h.confidence * 100).toFixed(0)}% confidence
               </span>
 
-              {h.risk_flags.length > 0 && (
+              {h.risk_flags && h.risk_flags.length > 0 && (
                 <span
                   className="
                     text-xs
@@ -88,7 +106,7 @@ export default function HeadlineList({ headlines }) {
                 </span>
               )}
 
-              {h.topics.map((t) => (
+              {h.topics && h.topics.map((t) => (
                 <span
                   key={t}
                   className="
