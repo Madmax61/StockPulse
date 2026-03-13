@@ -1,7 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import yfinance as yf
-from stock import get_price_history
 from analytics import get_market_status
 from models import FinbertDashboardOut
 from finbert import analyze_headlines, aggregate
